@@ -35,6 +35,5 @@ public class SortAssertions {
         $("#user-content-3-using-junit5-extend-test-class").preceding(0).shouldHave(text("JUnit5"));
         $("#user-content-3-using-junit5-extend-test-class").parent().sibling(0).shouldBe(visible);
         $("#user-content-3-using-junit5-extend-test-class").parent().sibling(0).find("pre").shouldBe(visible);
-        sleep(5000);
     }
 }
