@@ -20,7 +20,8 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                     userPicture,
                     userAddress,
                     userState,
-                    userCity;
+                    userCity,
+                    modalTitle;
 
     RegistrationPage registrationPage = new RegistrationPage();
     RandomUtils randomUtils = new RandomUtils();
@@ -41,6 +42,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
         userAddress = randomUtils.getUserAddress();
         userState = randomUtils.getUserState();
         userCity = randomUtils.getCityOfState(userState);
+        modalTitle = "Thanks for submitting the form";
 
     }
     @Test
@@ -61,7 +63,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                 .submitForm();
 
         registrationPage.checkResponseModal()
-                .checkModalTitle("Thanks for submitting the form");
+                .checkModalTitle(modalTitle);
 
         registrationPage.checkResult("Student Name", firstName + " " + lastName)
                 .checkResult("Student Email", userEmail)
@@ -87,7 +89,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                 .submitForm();
 
         registrationPage.checkResponseModal()
-                .checkModalTitle("Thanks for submitting the form");
+                .checkModalTitle(modalTitle);
 
         registrationPage.checkResult("Student Name", firstName + " " + lastName)
                 .checkResult("Student Email", userEmail)
