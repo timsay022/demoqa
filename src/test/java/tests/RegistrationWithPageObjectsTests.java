@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Attach;
+import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -123,33 +124,51 @@ public class RegistrationWithPageObjectsTests {
 
     @Test
     void fillRequiredFieldsTest() {
-        registrationPage.openPage()
-                .removeBanners()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
-                .setGender(gender)
-                .setUserNumber(phoneNumber)
-                .submitForm();
+        step("Открыть форму", () -> {
+            registrationPage.openPage()
+                    .removeBanners();
+        });
 
-        registrationPage.checkResponseModal()
-                .checkModalTitle(modalTitle);
+        step("Заполнить обязательные поля формы", () -> {
+            registrationPage.setFirstName(firstName)
+                    .setLastName(lastName)
+                    .setEmail(userEmail)
+                    .setGender(gender)
+                    .setUserNumber(phoneNumber)
+                    .submitForm();
+        });
 
-        registrationPage.checkResult("Student Name", firstName + " " + lastName)
-                .checkResult("Student Email", userEmail)
-                .checkResult("Gender", gender)
-                .checkResult("Mobile", phoneNumber);
+
+        step("Проверить модалку результатов на наличие заголовка", () -> {
+            registrationPage.checkResponseModal()
+                    .checkModalTitle(modalTitle);
+        });
+
+        step("Проверить форму на корректность", () -> {
+            registrationPage.checkResult("Student Name", firstName + " " + lastName)
+                    .checkResult("Student Email", userEmail)
+                    .checkResult("Gender", gender)
+                    .checkResult("Mobile", phoneNumber);
+        });
     }
 
     @Test
     void emptyLastNameTest() {
-        registrationPage.openPage()
-                .removeBanners()
-                .setFirstName(firstName)
-                .setGender(gender)
-                .setUserNumber(phoneNumber)
-                .submitForm();
+        step("Открыть форму", () -> {
+            registrationPage.openPage()
+                    .removeBanners();
+        });
 
-        registrationPage.checkLastUserField();
+        step("Заполнить обязательные поля формы, кроме LastName", () -> {
+            registrationPage.setFirstName(firstName)
+                    .setGender(gender)
+                    .setUserNumber(phoneNumber)
+                    .submitForm();
+        });
+
+        step("Проверить заполненность поля LastName", () -> {
+            registrationPage.checkLastUserField();
+        });
+
     }
 }
