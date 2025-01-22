@@ -15,7 +15,7 @@ import java.util.Map;
 
 import static io.qameta.allure.Allure.step;
 
-
+@Tag("demoqa")
 public class RegistrationWithPageObjectsTests {
     private String firstName,
                     lastName,
@@ -80,7 +80,7 @@ public class RegistrationWithPageObjectsTests {
         Attach.addVideo();
     }
 
-    @Tag("demoqa")
+
     @Test
     void fillFormTest() {
         step("Открыть форму", () -> {
