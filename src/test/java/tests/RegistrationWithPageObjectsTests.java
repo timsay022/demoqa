@@ -10,7 +10,7 @@ import utils.RandomUtils;
 
 import static io.qameta.allure.Allure.step;
 
-@Tag("demoqa")
+
 public class RegistrationWithPageObjectsTests {
     private String firstName,
                     lastName,
@@ -36,6 +36,7 @@ public class RegistrationWithPageObjectsTests {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.browserSize = "1920x1080";
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
     }
 
@@ -58,6 +59,8 @@ public class RegistrationWithPageObjectsTests {
         modalTitle = "Thanks for submitting the form";
 
     }
+
+    @Tag("demoqa")
     @Test
     void fillFormTest() {
         step("Открыть форму", () -> {
