@@ -1,6 +1,6 @@
 package helpers;
 
-import com.codeborne.selenide.Browser;
+
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
@@ -16,7 +16,7 @@ import static org.openqa.selenium.logging.LogType.BROWSER;
 
 public class Attach {
 
-    @Attachment(value = "{attachName", type = "image/png")
+    @Attachment(value = "{attachName}", type = "image/png")
     public static byte[] screenshotAs(String attachName) {
         return ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
     }
