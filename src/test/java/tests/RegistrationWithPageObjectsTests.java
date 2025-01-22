@@ -1,13 +1,17 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import utils.RandomUtils;
 
-@Tag("form")
-public class RegistrationWithPageObjectsTests extends TestBase {
+import static io.qameta.allure.Allure.step;
+
+@Tag("demoqa")
+public class RegistrationWithPageObjectsTests {
     private String firstName,
                     lastName,
                     userEmail,
@@ -26,6 +30,14 @@ public class RegistrationWithPageObjectsTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
     RandomUtils randomUtils = new RandomUtils();
+
+    @BeforeAll
+    static void beforeAll() {
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.pageLoadStrategy = "eager";
+        Configuration.browserSize = "1920x1080";
+
+    }
 
     @BeforeEach
     public void setup() {
@@ -48,34 +60,43 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     }
     @Test
     void fillFormTest() {
-        registrationPage.openPage()
-                .removeBanners()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
-                .setGender(gender)
-                .setUserNumber(phoneNumber)
-                .setDateOfBirth(dayOfBirth, monthOfBirth, yearOfBirth)
-                .setSubjects(userSubjects)
-                .setHobbies(userHobbies)
-                .setPicture(userPicture)
-                .setAddress(userAddress)
-                .setLocation(userState, userCity)
-                .submitForm();
+        step("Открыть форму", () -> {
+            registrationPage.openPage()
+                    .removeBanners();
+        });
 
-        registrationPage.checkResponseModal()
-                .checkModalTitle(modalTitle);
+        step("Заполнить форму", () -> {
+            registrationPage.setFirstName(firstName)
+                    .setLastName(lastName)
+                    .setEmail(userEmail)
+                    .setGender(gender)
+                    .setUserNumber(phoneNumber)
+                    .setDateOfBirth(dayOfBirth, monthOfBirth, yearOfBirth)
+                    .setSubjects(userSubjects)
+                    .setHobbies(userHobbies)
+                    .setPicture(userPicture)
+                    .setAddress(userAddress)
+                    .setLocation(userState, userCity)
+                    .submitForm();
+        });
 
-        registrationPage.checkResult("Student Name", firstName + " " + lastName)
-                .checkResult("Student Email", userEmail)
-                .checkResult("Gender", gender)
-                .checkResult("Mobile", phoneNumber)
-                .checkResult("Date of Birth", dayOfBirth + " " + monthOfBirth + "," + yearOfBirth)
-                .checkResult("Subjects", userSubjects)
-                .checkResult("Hobbies", userHobbies)
-                .checkResult("Picture", userPicture)
-                .checkResult("Address", userAddress)
-                .checkResult("State and City", userState + " " + userCity);
+        step("Проверить модалку результатов на наличие заголовка", () -> {
+            registrationPage.checkResponseModal()
+                    .checkModalTitle(modalTitle);
+        });
+
+        step("Проверить форму на корректность", () -> {
+            registrationPage.checkResult("Student Name", firstName + " " + lastName)
+                    .checkResult("Student Email", userEmail)
+                    .checkResult("Gender", gender)
+                    .checkResult("Mobile", phoneNumber)
+                    .checkResult("Date of Birth", dayOfBirth + " " + monthOfBirth + "," + yearOfBirth)
+                    .checkResult("Subjects", userSubjects)
+                    .checkResult("Hobbies", userHobbies)
+                    .checkResult("Picture", userPicture)
+                    .checkResult("Address", userAddress)
+                    .checkResult("State and City", userState + " " + userCity);
+        });
     }
 
     @Test
