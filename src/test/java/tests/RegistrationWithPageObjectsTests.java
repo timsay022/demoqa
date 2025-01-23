@@ -16,7 +16,7 @@ import java.util.Map;
 import static io.qameta.allure.Allure.step;
 
 @Tag("demoqa")
-public class RegistrationWithPageObjectsTests {
+public class RegistrationWithPageObjectsTests extends TestBase {
     private String firstName,
                     lastName,
                     userEmail,
@@ -54,14 +54,6 @@ public class RegistrationWithPageObjectsTests {
         userCity = randomUtils.getCityOfState(userState);
         modalTitle = "Thanks for submitting the form";
 
-    }
-
-    @AfterEach
-    void addAttachments() {
-        Attach.screenshotAs("Last screenshot");
-        Attach.pageSource();
-        Attach.browserConsoleLogs();
-        Attach.addVideo();
     }
 
 
