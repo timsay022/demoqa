@@ -36,25 +36,6 @@ public class RegistrationWithPageObjectsTests {
     RegistrationPage registrationPage = new RegistrationPage();
     RandomUtils randomUtils = new RandomUtils();
 
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
-        Configuration.browserSize = System.getProperty("browserSize");
-        Configuration.remote = System.getProperty("https://user1:1234@" + System.getProperty("wdHost") + "wd/hub");
-        Configuration.browser = System.getProperty("browser");
-        Configuration.browserVersion = System.getProperty("browserVersion");
-
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        Configuration.browserCapabilities = capabilities;
-    }
-
     @BeforeEach
     public void setup() {
         firstName = randomUtils.getFirstName();
