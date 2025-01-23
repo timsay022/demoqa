@@ -33,7 +33,7 @@ dependencies {
 
 tasks.withType(Test) {
     useJUnitPlatform()
-    systemProperties(system.getProperties())
+    systemProperties(System.getProperties())
 
     testLogging {
         lifecycle {
