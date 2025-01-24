@@ -60,8 +60,8 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     @Test
     void fillFormTest() {
         step("Открыть форму", () -> {
-            registrationPage.openPage()
-                    .removeBanners();
+            registrationPage.openPage();
+            registrationPage.removeBanners();
         });
 
         step("Заполнить форму", () -> {
