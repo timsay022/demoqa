@@ -2,7 +2,6 @@ package tests;
 
 import org.junit.jupiter.api.*;
 
-
 public class SimpleJUnitTest {
 
     int result;

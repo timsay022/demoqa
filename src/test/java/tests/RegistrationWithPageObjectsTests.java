@@ -1,17 +1,10 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import helpers.Attach;
-import io.qameta.allure.Step;
-import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.*;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import utils.RandomUtils;
-
-import java.util.Map;
 
 import static io.qameta.allure.Allure.step;
 
